@@ -6,10 +6,7 @@ import com.roshan.hotnote.feature_note.data.data_source.NoteDao
 import com.roshan.hotnote.feature_note.data.data_source.NoteDataBase
 import com.roshan.hotnote.feature_note.data.repository.NoteRepositoryImpl
 import com.roshan.hotnote.feature_note.domain.repository.NoteRepository
-import com.roshan.hotnote.feature_note.domain.use_case.AddNodeUseCase
-import com.roshan.hotnote.feature_note.domain.use_case.DeleteNoteUseCase
-import com.roshan.hotnote.feature_note.domain.use_case.GetNotesUseCase
-import com.roshan.hotnote.feature_note.domain.use_case.NotesUseCases
+import com.roshan.hotnote.feature_note.domain.use_case.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,14 +25,20 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNoteRepository(dataBase: NoteDataBase):NoteRepository{
+    fun provideNoteRepository(dataBase: NoteDataBase): NoteRepository {
         return NoteRepositoryImpl(dataBase.noteDao)
     }
 
     @Provides
     @Singleton
-    fun provideNoteUseCases(repository: NoteRepository):NotesUseCases{
-        return NotesUseCases(getNotesUseCase = GetNotesUseCase(repository), deleteNoteUseCase = DeleteNoteUseCase(repository), addNodeUseCase = AddNodeUseCase(repository))
+    fun provideNotesUseCases(repository: NoteRepository): NotesUseCases {
+        return NotesUseCases(
+            getNotesUseCase = GetNotesUseCase(repository),
+            deleteNoteUseCase = DeleteNoteUseCase(repository),
+            addNodeUseCase = AddNodeUseCase(repository),
+            getNoteUseCase = GetNoteUseCase(repository)
+        )
     }
+
 }
 

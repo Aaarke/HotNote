@@ -21,33 +21,30 @@ fun OrderSection(
                 selected = notesOrder is NotesOrder.Title,
                 onSelect = { onOrderChange(NotesOrder.Title(notesOrder.orderType)) }
             )
+            DefaultRadioButton(
+                text = "Date",
+                selected = notesOrder is NotesOrder.Date,
+                onSelect = { onOrderChange(NotesOrder.Date(notesOrder.orderType)) })
+
+            DefaultRadioButton(
+                text = "Color",
+                selected = notesOrder is NotesOrder.Color,
+                onSelect = { onOrderChange(NotesOrder.Color(notesOrder.orderType)) })
+            Spacer(modifier = Modifier.width(8.dp))
         }
         Spacer(modifier = Modifier.width(8.dp))
 
-        DefaultRadioButton(
-            text = "Date",
-            selected = notesOrder is NotesOrder.Date,
-            onSelect = { onOrderChange(NotesOrder.Date(notesOrder.orderType)) })
+        Row(modifier = Modifier.fillMaxWidth()) {
+            DefaultRadioButton(
+                text = "Ascending",
+                selected = notesOrder.orderType is OrderType.Ascending,
+                onSelect = { onOrderChange(notesOrder.copy(OrderType.Ascending)) })
 
-        Spacer(modifier = Modifier.width(8.dp))
-        DefaultRadioButton(
-            text = "Color",
-            selected = notesOrder is NotesOrder.Color,
-            onSelect = { onOrderChange(NotesOrder.Color(notesOrder.orderType)) })
-        Spacer(modifier = Modifier.width(8.dp))
-
-        DefaultRadioButton(
-            text = "Ascending",
-            selected = notesOrder.orderType is OrderType.Ascending,
-            onSelect = { onOrderChange(notesOrder.copy(OrderType.Ascending)) })
-
-        Spacer(modifier = Modifier.width(8.dp))
-
-        DefaultRadioButton(
-            text = "Descending",
-            selected = notesOrder.orderType is OrderType.Descending,
-            onSelect = { onOrderChange(notesOrder.copy(OrderType.Descending)) })
-
+            DefaultRadioButton(
+                text = "Descending",
+                selected = notesOrder.orderType is OrderType.Descending,
+                onSelect = { onOrderChange(notesOrder.copy(OrderType.Descending)) })
+        }
 
     }
 }
