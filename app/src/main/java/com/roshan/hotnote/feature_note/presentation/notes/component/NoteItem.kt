@@ -79,8 +79,15 @@ fun NoteItem(
             )
         }
 
-        IconButton(onClick = { onDeleteClick }, modifier = Modifier.align(Alignment.BottomEnd)) {
-            Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete node")
+        IconButton(
+            onClick = { onDeleteClick.invoke() },
+            modifier = Modifier.align(Alignment.BottomEnd)
+        ) {
+            Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = "Delete node",
+                tint = MaterialTheme.colors.onSurface
+            )
 
         }
     }
