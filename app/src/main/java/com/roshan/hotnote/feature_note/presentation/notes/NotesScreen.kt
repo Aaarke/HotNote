@@ -18,11 +18,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.roshan.hotnote.feature_note.presentation.notes.component.NoteItem
 import com.roshan.hotnote.feature_note.presentation.notes.component.OrderSection
+import com.roshan.hotnote.feature_note.presentation.util.Screen
 import kotlinx.coroutines.launch
 
 @Composable
 fun NotesScreen(
-    navController: NavController?,
+    navController: NavController,
     notesViewModel: NotesViewModel = hiltViewModel()
 ) {
     val state = notesViewModel.state.value
@@ -31,7 +32,7 @@ fun NotesScreen(
 
     Scaffold(floatingActionButton = {
         FloatingActionButton(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate(Screen.AddEditScreen.route) },
             backgroundColor = MaterialTheme.colors.primary
         ) {
             Icon(imageVector = Icons.Default.Add, contentDescription = "Add note")
@@ -77,7 +78,7 @@ fun NotesScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-
+                                navController.navigate(Screen.AddEditScreen.route + "?noteId=${note.id}&noteColor=${note.color}")
                             }, onDeleteClick = {
                             notesViewModel.onEvent(NotesEvent.DeleteNode(note))
                             scope.launch {
