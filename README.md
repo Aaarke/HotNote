@@ -3,7 +3,6 @@
 HoteNote is an application for Note taking currently contains only two screen 
 * List of saved notes
 * Create or edit notes screen.
-***
 
 ## Technologies
 ***
